@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación: Pseudocódigo vs Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .box h2 {
+            text-align: center;
+            color: #34495e;
+        }
+        .box pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .box button:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Comparación: Pseudocódigo vs Chatbot</h1>
+
+    <div class="container">
+        <!-- Sección de Pseudocódigo -->
+        <div class="box">
+            <h2>Pseudocódigo para Calcular la Suma de los Primeros N Números Naturales</h2>
+            <pre>
+Inicio
+   Leer N
+   suma = 0
+   Para i desde 1 hasta N Hacer
+      suma = suma + i
+   Fin Para
+   Mostrar suma
+Fin
+            </pre>
+            <input type="number" id="numN" placeholder="Ingrese el valor de N">
+            <button onclick="calcularSumatoriaConPseudocodigo()">Calcular Sumatoria</button>
+            <div class="result" id="resultadoPseudocodigo"></div>
+        </div>
+
+        <!-- Sección de Chatbot -->
+        <div class="box">
+            <h2>Chatbot para Calcular la Suma de los Primeros N Números Naturales</h2>
+            <pre>
+Prompt: "suma de los primeros 5 números"
+Respuesta: "La suma de los primeros 5 números es 15."
+            </pre>
+            <input type="text" id="prompt" placeholder="Escribe 'suma de los primeros X números'">
+            <button onclick="responderChatbot()">Enviar</button>
+            <div class="result" id="resultadoChatbot"></div>
+        </div>
+    </div>
+
+    <script>
+        // Función para calcular la sumatoria usando pseudocódigo
+        function calcularSumatoriaConPseudocodigo() {
+            const N = parseInt(document.getElementById('numN').value);
+
+            if (isNaN(N) || N < 1) {
+                document.getElementById('resultadoPseudocodigo').innerText = "Por favor, ingrese un número válido mayor o igual a 1.";
+                return;
+            }
+
+            let suma = 0;
+            for (let i = 1; i <= N; i++) {
+                suma += i;
+            }
+            document.getElementById('resultadoPseudocodigo').innerText = `La suma de los primeros ${N} números es: ${suma}`;
+        }
+
+        // Función para el chatbot
+        function responderChatbot() {
+            const prompt = document.getElementById('prompt').value.toLowerCase();
+            const numero = prompt.match(/\d+/); // Extraer el número del prompt
+
+            if (prompt.includes("suma de los primeros") && numero) {
+                const N = parseInt(numero[0]);
+                if (N >= 1) {
+                    const suma = (N * (N + 1)) / 2; // Fórmula de la suma de los primeros N números naturales
+                    document.getElementById('resultadoChatbot').innerText = `La suma de los primeros ${N} números es: ${suma}`;
+                } else {
+                    document.getElementById('resultadoChatbot').innerText = "Por favor, ingrese un número válido mayor o igual a 1.";
+                }
+            } else {
+                document.getElementById('resultadoChatbot').innerText = "No entendí. Escribe 'suma de los primeros X números'.";
+            }
+        }
+    </script>
+
+</body>
+</html>
